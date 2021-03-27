@@ -1,0 +1,36 @@
+package st;
+
+import java.util.HashMap;
+
+public class maximumlengthwithkdistinctcharacters {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String str="abbbahj";
+		int k=2;
+		System.out.println(kl(str,k));
+	}
+	public static int kl(String str,int k) {
+		HashMap<Character,Integer> h=new HashMap<Character,Integer>();
+		int start=0;
+		int end=0;
+		int maxlength=0;
+		
+		while(end<str.length()){
+			char curr=str.charAt(end);
+			h.put(curr, h.getOrDefault(curr, 0)+1);
+			while(h.size()>k) {
+				char fro=str.charAt(start);
+				h.put(fro, h.get(fro)-1);
+				if(h.get(fro)==0) {
+					h.remove(fro);
+				}
+				start++;
+			}
+			maxlength=Math.max(maxlength, end-start+1);
+			end++;
+		}
+		return maxlength;
+	}
+
+}
